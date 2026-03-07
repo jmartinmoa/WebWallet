@@ -4,7 +4,7 @@ import { Cloud, Download, Upload, Trash2, Info, Eye, EyeOff, Moon, Sun, Save, Re
 import { useApp } from '../lib/context';
 import { exportBackup, importBackup, loadFromGAS, clearData } from '../lib/storage';
 import { DEFAULT_DATA } from '../constants';
-import { ConfirmDialog, Toast } from '../components/ui/page';
+import { ConfirmDialog, Toast } from '../../components/ui/page';
 
 
 type SyncStatus = 'idle' | 'pushing' | 'pulling' | 'ok' | 'error';

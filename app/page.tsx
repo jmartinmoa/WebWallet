@@ -1,17 +1,17 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { AppProvider } from './lib/context';
-import Login from './login/page';
-import Sidebar, { TopBar } from './components/sidebar/page';
-import Dashboard from './dashboard/page';
-import Transactions from './transactions/page';
-import Investments from './investments/page';
-import Cards from './cards/page';
-import Categories from './categories/page';
-import Debts from './debts/page';
-import Subscriptions from './subscriptions/page';
-import Reminders from './reminders/page';
-import Settings from './settings/page';
+import Login from './login/login';
+import Sidebar, { TopBar } from '../components/sidebar/page';
+import Dashboard from './dashboard/dashboard';
+import Transactions from './transactions/transactions';
+import Investments from './investments/investments';
+import Cards from './cards/cards';
+import Categories from './categories/categories';
+import Debts from './debts/debts';
+import Subscriptions from './subscriptions/subscriptions';
+import Reminders from './reminders/reminders';
+import Settings from './settings/settings';
 
 const PAGE_MAP: Record<string, React.ComponentType> = {
   dashboard: Dashboard,

@@ -126,3 +126,7 @@ export function Amount({ value, hide, className, prefix = '', style }: {
   const formatted = hide ? '••••••' : `${prefix}$${Math.abs(value).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
   return <span className={`${className || ''} ${hide ? 'amount-hidden' : ''}`} style={style}>{formatted}</span>;
 }
+
+export default function UIInternalPage() {
+  return null; 
+}

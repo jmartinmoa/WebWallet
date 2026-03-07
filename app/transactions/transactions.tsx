@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Search, Edit2, Trash2, Copy, TrendingUp, TrendingDown, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { useApp } from '../lib/context';
-import { Modal, ConfirmDialog, EmptyState, Pagination } from '../components/ui/page';
+import { Modal, ConfirmDialog, EmptyState, Pagination } from '../../components/ui/page';
 import { groupTransactionsByWeek, formatDate, parseLocalDate } from '../lib/utils';
 import { Transaction } from '../types';
 

@@ -8,7 +8,7 @@ import {
 import { useApp } from '../lib/context';
 import { calcTotals, formatDate, getUpcomingReminders, parseLocalDate } from '../lib/utils';
 import { CHART_COLORS } from '../constants';
-import { Amount } from '../components/ui/page';
+import { Amount } from '../../components/ui/page';
 import { Chart, registerables } from 'chart.js';
 
 if (typeof window !== 'undefined') Chart.register(...registerables);

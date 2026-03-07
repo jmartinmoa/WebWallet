@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Edit2, Trash2, RefreshCw, PauseCircle, XCircle, CheckCircle, Clock } from 'lucide-react';
 import { useApp } from '../lib/context';
-import { Modal, ConfirmDialog, EmptyState, Pagination } from '../components/ui/page';
+import { Modal, ConfirmDialog, EmptyState, Pagination } from '../../components/ui/page';
 import { Subscription, SubscriptionFrequency, SubscriptionStatus } from '../types';
 
 const EMPTY: Omit<Subscription, 'id'> = {

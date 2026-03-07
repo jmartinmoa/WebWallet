@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Plus, Edit2, Trash2, ChevronUp, ChevronDown } from 'lucide-react';
 import { useApp } from '../lib/context';
-import { Modal, ConfirmDialog, EmptyState, Pagination } from '../components/ui/page';
+import { Modal, ConfirmDialog, EmptyState, Pagination } from '../../components/ui/page';
 import { Debt } from '../types';
 import { calcDebtProgress } from '../lib/utils';
 import { Chart, registerables } from 'chart.js';

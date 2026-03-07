@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
 import { useApp } from '../lib/context';
-import { Modal, ConfirmDialog, ColorPicker, EmptyState } from '../components/ui/page';
+import { Modal, ConfirmDialog, ColorPicker, EmptyState } from '../../components/ui/page';
 import { Category } from '../types';
 import { CHART_COLORS } from '../constants';
 

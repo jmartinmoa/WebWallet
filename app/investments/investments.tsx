@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Plus, Edit2, Trash2, TrendingUp, TrendingDown, Copy, Search } from 'lucide-react';
 import { useApp } from '../lib/context';
-import { Modal, ConfirmDialog, EmptyState, Pagination } from '../components/ui/page';
+import { Modal, ConfirmDialog, EmptyState, Pagination } from '../../components/ui/page';
 import { Investment } from '../types';
 import { parseLocalDate } from '../lib/utils';
 import { Chart, registerables } from 'chart.js';
