@@ -1,18 +1,15 @@
 'use client';
 import React, { useState } from 'react';
 import { DollarSign, Eye, EyeOff, Lock } from 'lucide-react';
-import { DEFAULT_PASSWORD } from '@/app/constants';
+import { DEFAULT_PASSWORD } from '../constants';
 
-
-interface LoginProps {
-  onLogin: () => void;
-}
+interface LoginProps { onLogin: () => void; }
 
 export default function Login({ onLogin }: LoginProps) {
   const [password, setPassword] = useState('');
-  const [showPwd, setShowPwd] = useState(false);
-  const [error, setError] = useState('');
-  const [shaking, setShaking] = useState(false);
+  const [showPwd, setShowPwd]   = useState(false);
+  const [error, setError]       = useState('');
+  const [shaking, setShaking]   = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,42 +24,32 @@ export default function Login({ onLogin }: LoginProps) {
 
   return (
     <div style={{
-      minHeight: '100vh',
+      minHeight: '100dvh', // dvh fixes mobile browser chrome/address bar
       background: 'var(--bg)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      padding: '1rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '1.25rem',
+      boxSizing: 'border-box',
     }}>
-      {/* Background accent */}
-      <div style={{
-        position: 'fixed', top: '-20%', right: '-10%',
-        width: '500px', height: '500px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'fixed', bottom: '-15%', left: '-5%',
-        width: '400px', height: '400px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+      {/* Background blobs */}
+      <div style={{ position: 'fixed', top: '-20%', right: '-10%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'fixed', bottom: '-15%', left: '-5%', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
-      <div style={{ width: '100%', maxWidth: 380, position: 'relative', zIndex: 1 }}>
+      <div style={{ width: '100%', maxWidth: 400, position: 'relative', zIndex: 1 }}>
+
         {/* Logo */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{
-            width: 60, height: 60, borderRadius: 16,
+            width: 64, height: 64, borderRadius: 18,
             background: 'var(--accent)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             margin: '0 auto 1rem',
-            boxShadow: '0 8px 20px rgba(99,102,241,0.3)',
+            boxShadow: '0 8px 24px rgba(99,102,241,0.35)',
           }}>
-            <DollarSign size={30} color="#fff" />
+            <DollarSign size={32} color="#fff" />
           </div>
-          <h1 style={{
-            fontFamily: 'Playfair Display, serif',
-            fontSize: '1.8rem', fontWeight: 700,
-            margin: '0 0 0.3rem', color: 'var(--text)',
-          }}>
+          <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: 'clamp(1.6rem, 5vw, 2rem)', fontWeight: 700, margin: '0 0 0.3rem', color: 'var(--text)' }}>
             FinTracker
           </h1>
           <p style={{ color: 'var(--text2)', fontSize: '0.9rem', margin: 0 }}>
@@ -71,11 +58,8 @@ export default function Login({ onLogin }: LoginProps) {
         </div>
 
         {/* Card */}
-        <div className="card" style={{ padding: '2rem' }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '0.5rem',
-            marginBottom: '1.5rem',
-          }}>
+        <div className="card" style={{ padding: 'clamp(1.25rem, 5vw, 2rem)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
             <Lock size={16} style={{ color: 'var(--text2)' }} />
             <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Enter your password</span>
           </div>
@@ -90,8 +74,8 @@ export default function Login({ onLogin }: LoginProps) {
                   value={password}
                   onChange={(e) => { setPassword(e.target.value); setError(''); }}
                   placeholder="Enter password..."
-                  autoFocus
-                  style={{ paddingRight: '2.5rem' }}
+                  autoComplete="current-password"
+                  style={{ paddingRight: '2.75rem', fontSize: '1rem' /* prevents iOS zoom on focus */ }}
                 />
                 <button
                   type="button"
@@ -100,15 +84,16 @@ export default function Login({ onLogin }: LoginProps) {
                     position: 'absolute', right: '0.75rem', top: '50%',
                     transform: 'translateY(-50%)',
                     background: 'none', border: 'none', cursor: 'pointer',
-                    color: 'var(--text3)', padding: 0,
+                    color: 'var(--text3)', padding: '0.25rem',
+                    WebkitTapHighlightColor: 'transparent',
                   }}
                 >
-                  {showPwd ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPwd ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
               {error && (
-                <p style={{ color: 'var(--danger)', fontSize: '0.8rem', margin: '0.4rem 0 0' }}>
-                  {error}
+                <p style={{ color: 'var(--danger)', fontSize: '0.82rem', margin: '0.4rem 0 0', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  ⚠ {error}
                 </p>
               )}
             </div>
@@ -116,17 +101,15 @@ export default function Login({ onLogin }: LoginProps) {
             <button
               type="submit"
               className="btn btn-primary"
-              style={{ width: '100%', justifyContent: 'center', padding: '0.7rem' }}
+              style={{ width: '100%', justifyContent: 'center', padding: '0.85rem', fontSize: '1rem', marginTop: '0.25rem' }}
             >
               Sign In
             </button>
           </form>
 
-          <p style={{
-            textAlign: 'center', marginTop: '1.25rem',
-            fontSize: '0.75rem', color: 'var(--text3)',
-          }}>
-            Default password: <code style={{ background: 'var(--surface2)', padding: '0.1rem 0.4rem', borderRadius: 4 }}>admin</code>
+          <p style={{ textAlign: 'center', marginTop: '1.25rem', fontSize: '0.75rem', color: 'var(--text3)' }}>
+            Default password:{' '}
+            <code style={{ background: 'var(--surface2)', padding: '0.1rem 0.5rem', borderRadius: 4 }}>admin</code>
           </p>
         </div>
       </div>
@@ -134,10 +117,10 @@ export default function Login({ onLogin }: LoginProps) {
       <style>{`
         @keyframes shake {
           0%, 100% { transform: translateX(0); }
-          20% { transform: translateX(-8px); }
-          40% { transform: translateX(8px); }
-          60% { transform: translateX(-4px); }
-          80% { transform: translateX(4px); }
+          20%       { transform: translateX(-8px); }
+          40%       { transform: translateX(8px); }
+          60%       { transform: translateX(-4px); }
+          80%       { transform: translateX(4px); }
         }
         .shake { animation: shake 0.4s ease; }
       `}</style>

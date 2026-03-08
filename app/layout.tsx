@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'WebWallet — Personal',
+  title: 'FinTracker — Personal Finance',
   description: 'Track your income, expenses, investments, debts, subscriptions, and reminders.',
-  viewport: 'width=device-width, initial-scale=1',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
