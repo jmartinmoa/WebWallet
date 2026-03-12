@@ -87,7 +87,7 @@ export default function Debts() {
   function setField(k: keyof typeof form, v: any) { setForm((f) => ({ ...f, [k]: v })); }
 
   function handleSave() {
-    if (!form.name || !form.totalAmount) return;
+    if (!form.name || form.totalAmount <= 0) return;
     if (editing) updateDebt({ ...form, id: editing.id });
     else addDebt(form);
     setModalOpen(false);
