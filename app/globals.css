@@ -504,3 +504,14 @@ tr:hover td { background: var(--surface2); }
   from { transform: translateY(100%); opacity: 0.8; }
   to   { transform: translateY(0);    opacity: 1; }
 }
+
+/* Force 1-col form grids on mobile regardless of inline styles */
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Inputs: prevent iOS zoom (must be >= 16px) */
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
