@@ -23,14 +23,31 @@ export function Modal({ open, onClose, title, children, footer }: {
 }) {
   const isMobile = useIsMobile();
 
-  // Lock body scroll when open
+  // Lock body scroll — position:fixed trick required for iOS Safari
   useEffect(() => {
     if (open) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
       document.body.style.overflow = 'hidden';
     } else {
+      const top = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
       document.body.style.overflow = '';
+      if (top) window.scrollTo(0, -parseInt(top || '0'));
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+    };
   }, [open]);
 
   // Escape key closes on desktop
@@ -42,29 +59,39 @@ export function Modal({ open, onClose, title, children, footer }: {
 
   if (!open) return null;
 
-  // ── MOBILE: full-screen overlay ───────────────────────────────────────────
+  // ── MOBILE: full-screen, completely fixed, only inner body scrolls ───────
   if (isMobile) {
     return (
       <div style={{
-        position: 'fixed', inset: 0, zIndex: 200,
+        position: 'fixed',
+        top: 0, left: 0, right: 0, bottom: 0,
+        zIndex: 200,
         background: 'var(--bg)',
-        display: 'flex', flexDirection: 'column',
-        overflowY: 'auto',
-        WebkitOverflowScrolling: 'touch',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden', // outer container NEVER scrolls
+        // prevent any touch-drag moving the whole panel
+        touchAction: 'none',
       }}>
-        {/* Header */}
+        {/* Header — fixed height, never moves */}
         <div style={{
-          position: 'sticky', top: 0, zIndex: 10,
+          flexShrink: 0,
           background: 'var(--bg)',
           borderBottom: '1px solid var(--border)',
           padding: '0 1rem',
           display: 'flex', alignItems: 'center', gap: '0.75rem',
-          minHeight: 56,
-          flexShrink: 0,
+          height: 56,
         }}>
           <button
             onClick={onClose}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--accent)', display: 'flex', alignItems: 'center', gap: '0.25rem', padding: '0.5rem 0', fontSize: '0.95rem', fontWeight: 600, WebkitTapHighlightColor: 'transparent' }}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: 'var(--accent)',
+              display: 'flex', alignItems: 'center', gap: '0.25rem',
+              padding: '0.5rem 0', fontSize: '0.95rem', fontWeight: 600,
+              WebkitTapHighlightColor: 'transparent',
+              touchAction: 'manipulation',
+            }}
           >
             <ChevronLeft size={20} /> Back
           </button>
@@ -73,22 +100,27 @@ export function Modal({ open, onClose, title, children, footer }: {
           </h3>
         </div>
 
-        {/* Body */}
-        <div style={{ padding: '1.25rem 1rem', flex: 1 }}>
+        {/* Body — this is the ONLY thing that scrolls */}
+        <div style={{
+          flex: 1,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          WebkitOverflowScrolling: 'touch',
+          touchAction: 'pan-y', // re-enable vertical scroll only inside here
+          padding: '1.25rem 1rem',
+        }}>
           {children}
         </div>
 
-        {/* Footer — sticky at bottom */}
+        {/* Footer — fixed height, never moves */}
         {footer && (
           <div style={{
-            position: 'sticky', bottom: 0,
+            flexShrink: 0,
             background: 'var(--bg)',
             borderTop: '1px solid var(--border)',
             padding: '0.9rem 1rem',
             display: 'flex', gap: '0.75rem',
-            flexShrink: 0,
           }}>
-            {/* Make buttons fill width on mobile */}
             {React.Children.map(footer as React.ReactElement, (child: any) =>
               React.cloneElement(child, {
                 style: { ...child.props.style, flex: 1, justifyContent: 'center' }
@@ -135,10 +167,14 @@ export function ConfirmDialog({ open, onClose, onConfirm, title, message }: {
   if (isMobile) {
     return (
       <div style={{
-        position: 'fixed', inset: 0, zIndex: 200,
+        position: 'fixed',
+        top: 0, left: 0, right: 0, bottom: 0,
+        zIndex: 200,
         background: 'var(--bg)',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
         padding: '2rem 1.5rem',
+        overflow: 'hidden',
+        touchAction: 'none',
       }}>
         <AlertTriangle size={44} style={{ color: 'var(--danger)', marginBottom: '1rem' }} />
         <h3 style={{ margin: '0 0 0.75rem', fontFamily: 'DM Sans, sans-serif', textAlign: 'center', fontSize: '1.15rem' }}>{title}</h3>

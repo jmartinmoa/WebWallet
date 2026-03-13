@@ -107,10 +107,7 @@ export default function Login({ onLogin }: LoginProps) {
             </button>
           </form>
 
-          <p style={{ textAlign: 'center', marginTop: '1.25rem', fontSize: '0.75rem', color: 'var(--text3)' }}>
-            Default password:{' '}
-            <code style={{ background: 'var(--surface2)', padding: '0.1rem 0.5rem', borderRadius: 4 }}>admin</code>
-          </p>
+   
         </div>
       </div>
 
