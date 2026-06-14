@@ -32,6 +32,8 @@ interface AppContextType {
   setData: (d: AppData) => void;
   syncCloud: (overrideData?: AppData) => Promise<boolean>;
   pullCloud: () => Promise<boolean>;
+  toggleTheme: () => void;
+  signOut: () => void;
   isSyncing: boolean;
   isPulling: boolean;
   isBooting: boolean;       // true while initial pull from Drive is in progress
@@ -196,6 +198,21 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const setData = (d: AppData) => persist(d);
 
+  const toggleTheme = () => {
+    const next: 'light' | 'dark' = data.settings.theme === 'dark' ? 'light' : 'dark';
+    const newData = { ...data, settings: { ...data.settings, theme: next } };
+    persist(newData);
+    debouncedCloudPush(newData);
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.toggle('dark', next === 'dark');
+    }
+  };
+
+  const signOut = () => {
+    if (typeof sessionStorage !== 'undefined') sessionStorage.removeItem('ft_auth');
+    if (typeof window !== 'undefined') window.location.reload();
+  };
+
   return (
     <AppContext.Provider value={{
       data,
@@ -208,6 +225,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       addCategory, updateCategory, deleteCategory,
       updateSettings, setData,
       syncCloud, pullCloud,
+      toggleTheme, signOut,
       isSyncing, isPulling, isBooting,
       lastSynced, lastPulled,
     }}>

@@ -28,7 +28,7 @@ export interface Investment {
   name: string;
   type: string;
   amountInvested: number;
-  currentValue: number;
+  value: number;
   date: string;
 }
 
@@ -90,4 +90,5 @@ export interface AppSettings {
   reminderThresholdDays: number;
   hideAmounts: boolean;
   theme: 'light' | 'dark';
+  userName: string;
 }

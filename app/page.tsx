@@ -55,7 +55,7 @@ function BootScreen() {
 
       <div style={{ textAlign: 'center' }}>
         <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', margin: '0 0 0.4rem', color: 'var(--text)' }}>
-          FinTracker
+          WebWallet
         </h2>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', color: 'var(--text2)', fontSize: '0.9rem' }}>
           <CloudDownload size={16} style={{ color: 'var(--accent)' }} />

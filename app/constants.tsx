@@ -1,8 +1,5 @@
 import { AppData, Category } from "./types";
-
-
 export const DEFAULT_PASSWORD = 'admin';
-
 export const DEFAULT_CATEGORIES: Category[] = [
   // Income
   { id: 'inc-1', name: 'Salary', color: '#10b981', type: 'income' },
@@ -29,7 +26,6 @@ export const DEFAULT_CATEGORIES: Category[] = [
   { id: 'shop-2', name: 'Supermarket', color: '#10b981', type: 'shop' },
   { id: 'shop-3', name: 'Online', color: '#6366f1', type: 'shop' },
 ];
-
 export const DEFAULT_DATA: AppData = {
   transactions: [],
   investments: [],
@@ -43,15 +39,14 @@ export const DEFAULT_DATA: AppData = {
     reminderThresholdDays: 7,
     hideAmounts: false,
     theme: 'light',
+    userName: '',
   },
 };
-
 export const CARD_COLORS = [
   '#1e293b', '#0f172a', '#1e3a5f', '#134e4a',
   '#4a1d96', '#7c2d12', '#064e3b', '#1e1b4b',
   '#831843', '#78350f',
 ];
-
 export const CHART_COLORS = [
   '#6366f1', '#10b981', '#f59e0b', '#ef4444',
   '#8b5cf6', '#06b6d4', '#ec4899', '#f97316',

@@ -165,6 +165,21 @@ export default function Settings() {
         <div className="card">
           <h3 style={{ margin: '0 0 1rem', fontSize: '1rem', fontFamily: 'DM Sans, sans-serif', fontWeight: 600 }}>Display</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {/* User name */}
+            <div>
+              <div style={{ fontWeight: 500, fontSize: '0.875rem', marginBottom: '0.35rem' }}>Display Name</div>
+              <div style={{ fontSize: '0.78rem', color: 'var(--text2)', marginBottom: '0.5rem' }}>Shown in the sidebar and synced to Drive</div>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input
+                  className="input"
+                  placeholder="e.g. Martin Morales"
+                  defaultValue={data.settings.userName || ''}
+                  onBlur={(e) => updateSettings({ userName: e.target.value.trim() })}
+                  style={{ flex: 1 }}
+                />
+              </div>
+            </div>
+            <div style={{ height: 1, background: 'var(--border)' }} />
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
                 <div style={{ fontWeight: 500, fontSize: '0.875rem' }}>Hide Amounts</div>
@@ -315,7 +330,7 @@ export default function Settings() {
             <Info size={18} /> About
           </h3>
           <div style={{ fontSize: '0.875rem', color: 'var(--text2)', lineHeight: 1.7 }}>
-            <p style={{ margin: '0 0 0.25rem' }}><strong>FinTracker</strong> v1.0.0</p>
+            <p style={{ margin: '0 0 0.25rem' }}><strong>WebWallet</strong> v1.0.0</p>
             <p style={{ margin: '0 0 0.25rem' }}>Personal finance tracker built with Next.js 14. Tracks transactions, investments, debts, subscriptions, reminders — all in one place.</p>
             <p style={{ margin: 0 }}>Data lives in your browser (localStorage). Cloud sync via Google Drive is optional and encrypted.</p>
           </div>

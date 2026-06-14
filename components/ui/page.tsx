@@ -11,7 +11,7 @@ function useIsMobile() {
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
-  return isMobile;
+  return isMobile;  
 }
 
 // ── Modal ─────────────────────────────────────────────────────────────────────
@@ -69,11 +69,10 @@ export function Modal({ open, onClose, title, children, footer }: {
         background: 'var(--bg)',
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'hidden', // outer container NEVER scrolls
-        // prevent any touch-drag moving the whole panel
+        overflow: 'hidden',
         touchAction: 'none',
       }}>
-        {/* Header — fixed height, never moves */}
+        {/* Header */}
         <div style={{
           flexShrink: 0,
           background: 'var(--bg)',
@@ -82,17 +81,14 @@ export function Modal({ open, onClose, title, children, footer }: {
           display: 'flex', alignItems: 'center', gap: '0.75rem',
           height: 56,
         }}>
-          <button
-            onClick={onClose}
-            style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: 'var(--accent)',
-              display: 'flex', alignItems: 'center', gap: '0.25rem',
-              padding: '0.5rem 0', fontSize: '0.95rem', fontWeight: 600,
-              WebkitTapHighlightColor: 'transparent',
-              touchAction: 'manipulation',
-            }}
-          >
+          <button onClick={onClose} style={{
+            background: 'none', border: 'none', cursor: 'pointer',
+            color: 'var(--accent)',
+            display: 'flex', alignItems: 'center', gap: '0.25rem',
+            padding: '0.5rem 0', fontSize: '0.95rem', fontWeight: 600,
+            WebkitTapHighlightColor: 'transparent',
+            touchAction: 'manipulation',
+          }}>
             <ChevronLeft size={20} /> Back
           </button>
           <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, fontFamily: 'DM Sans, sans-serif', flex: 1 }}>
@@ -100,32 +96,19 @@ export function Modal({ open, onClose, title, children, footer }: {
           </h3>
         </div>
 
-        {/* Body — this is the ONLY thing that scrolls */}
+        {/* Scrollable body */}
         <div style={{
-          flex: 1,
-          overflowY: 'auto',
-          overflowX: 'hidden',
-          WebkitOverflowScrolling: 'touch',
-          touchAction: 'pan-y', // re-enable vertical scroll only inside here
+          flex: 1, overflowY: 'auto', overflowX: 'hidden',
+          WebkitOverflowScrolling: 'touch', touchAction: 'pan-y',
           padding: '1.25rem 1rem',
         }}>
           {children}
         </div>
 
-        {/* Footer — fixed height, never moves */}
+        {/* Footer — CSS class handles button styling */}
         {footer && (
-          <div style={{
-            flexShrink: 0,
-            background: 'var(--bg)',
-            borderTop: '1px solid var(--border)',
-            padding: '0.9rem 1rem',
-            display: 'flex', gap: '0.75rem',
-          }}>
-            {React.Children.map(footer as React.ReactElement, (child: any) =>
-              React.cloneElement(child, {
-                style: { ...child.props.style, flex: 1, justifyContent: 'center' }
-              })
-            )}
+          <div className="mobile-modal-footer">
+            {footer}
           </div>
         )}
       </div>
